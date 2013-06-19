@@ -43,7 +43,7 @@ function nextScreen() {
 	if (this.currentScreen.submessage) {
 		$('#showmsg').append('</br>' + this.currentScreen.submessage);
 	} else {
-		$('#showmsg').append('</br');
+		$('#showmsg').append('</br>');
 	}
 	$('#textbox').val('');
 }
