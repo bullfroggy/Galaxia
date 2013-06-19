@@ -2,7 +2,7 @@
 body {background:url(images/bodybg.jpg) fixed repeat; font: 12px Verdana, Geneva, sans-serif; color:#999;}
 #wrap {width:965px; margin:auto;}
 #nav {
-  background:url(images/topbar.png) no-repeat;
+	background:url(images/topbar.png) no-repeat;
 	width:970px;
 	position:fixed;
 	top:0;
