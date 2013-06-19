@@ -1,3 +1,38 @@
+.hidden {
+	display : none !important;
+}
+#game_object input {
+	outline :  none;
+	display : block;
+	margin : 5px auto;
+	width : 150px;
+	height : 20px;
+	background-color: #555;
+	border : 1px solid #444;
+	padding : 0 10px;
+
+	-moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+
+    box-shadow: 3px 3px 3px #666 inset;
+}
+#game_object input:focus {
+	border : 2px solid #333;
+}
+#game_object {
+	background-color: #444;
+	height : 500px;
+	width : 500px;
+	margin : 20px auto;
+	position : relative;
+}
+
+/*----------Template stuff----------*/
 * {padding:0; margin:0;}
 body {background:url(images/bodybg.jpg) fixed repeat; font: 12px Verdana, Geneva, sans-serif; color:#999;}
 #wrap {width:965px; margin:auto;}
