@@ -20,14 +20,15 @@ $(document).ready(function() {
 					//just playing around doing some dynamic css
 					$('#innerwindow').css({
 						position: 'absolute',
-						width: 475,
-						height: 475,
-						padding: 5,
-						margin: 5,
+						width: '475px',
+						height: '475px',
+						padding: '5px',
+						margin: '5px',
 						border: '1px solid gray',
 
 						'text-align':'center'
 					});
+
 					//add the html here this way we just have to move the div around on the html file
 					$('#innerwindow').html("<div id='showmsg'> <p>" + screens.currentScreen.message + "</p></div>")
 						.append('<label class="uspw for="username">Username:</label>')
@@ -35,15 +36,11 @@ $(document).ready(function() {
 						.append('<label class="uspw for="password">Password:</label>')
 						.append('<input type="password" class="uspw" id="password" width="300">')
 						.append('<input class="hidden" id="textbox">');
-					$('#showmsg').css({
-						color : '#999',
-						fontSize : '14px'
-					});
 
 					callback();
 				};
 
-				addHTML( _(function() {
+				addHTML( function() {
 
 					// event handler for password box
 					// TODO: add validation and database support
@@ -51,7 +48,6 @@ $(document).ready(function() {
 						var code = (e.keyCode ? e.keyCode : e.which);
 						if (code === 13) {
 							screens.next();
-							$('#showmsg').html('<p>' + screens.currentScreen.message + '</p>');
 							$('.uspw').hide();
 							$('#textbox').removeClass('hidden');
 						}
@@ -63,25 +59,24 @@ $(document).ready(function() {
 						// if e.keyCode is available then use that, otherwise use e.which
 						// probably for browser portability or something
 						// Enter = 13
-						var code = (e.keyCode ? e.keyCode : e.which),
-						value = this.value;
+						var code = (e.keyCode ? e.keyCode : e.which);
 						if (code === 13) {
-							_.each(screens.currentScreen.acceptable, function (a) {
-								if (a === value) {
+							_.each(screens.currentScreen.acceptable, _(function (ans) {
+								if (ans === this.value) {
 									screens.next();
 								} else {
 									screens.death();
 								}
-							});
+							}).bind(this));
 						}
 					});
 					
-				}).bind(this));
+				});
 
 			}
 		});
 
-		/* Run the game */
+		// Run the game
 		$("#game_object").galaxia();
 	});
 })

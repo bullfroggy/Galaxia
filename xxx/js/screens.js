@@ -51,7 +51,7 @@ function nextScreen() {
 function deathScreen() {
 	this.currentScreen = death;
 	this.screenIndex = 0;
-	$('#showmsg').html(screens.currentScreen.message)
-		.append('</br>' + screens.currentScreen.submessage);
+	$('#showmsg').html(this.currentScreen.message)
+		.append('</br>' + this.currentScreen.submessage);
 	$('#textbox').val('');
 }

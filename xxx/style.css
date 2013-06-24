@@ -21,7 +21,7 @@
 
 #game_object input:focus {
 	outline: none;
-	border: 2px solid #333;
+	border: 2px outset #777;
 }
 
 #game_object {
@@ -30,6 +30,11 @@
 	width: 500px;
 	margin: 20px auto;
 	position: relative;
+}
+
+#showmsg {
+	color : #999;
+	font-size: 14px;
 }
 
 /*----------Template stuff----------*/
