@@ -378,31 +378,6 @@ p.ads img {
 	text-shadow: #000 1px 1px 1px;
 }
 
-#searchbar {
-	margin-left: 665px;
-	padding: 6px 0 0;
-}
-
-#searchbar div {
-	float: left;
-	margin-right: 5px;
-}
-
-#searchbar input {
-	color: #fff;
-}
-
-#searchbar .keyword {
-	display: block;
-	background: transparent url(images/searchfield.jpg) no-repeat;
-	width: 185px;
-	height: 27px;
-	padding: 5px 5px 0;
-	border: none;
-	float: left;
-	color: #fff;
-}
-
 #sidebar .posts {
 	padding: 5px;
 }
