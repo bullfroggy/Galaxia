@@ -50,18 +50,19 @@ body {
 }
 
 #wrap {
+	box-shadow : 0px 0px 15px 5px #FFF;
 	width: 965px;
 	margin: auto;
 }
 
 #nav {
 	background: url(images/topbar.png) no-repeat;
-	width: 970px;
+	width: 965px;
 	position: fixed;
 	top: 0;
 	left: 50%;
 	height: 125px;
-	margin: 0 0 0 -485px;
+	margin: 0 0 0 -483px;
 	z-index: 99;
 }
 
