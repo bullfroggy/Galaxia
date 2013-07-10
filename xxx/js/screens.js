@@ -1,6 +1,5 @@
 
 
-
 ////////////
 //Note: All 'acceptable' and all switch cases must be all lower case
 //		The value is .toLowerCase() before being sent to the next function
@@ -16,20 +15,23 @@ var screens = {
 	welcome : {
 		message : 'Welcome to Galaxia',
 		submessage : 'Type "start" to begin',
-		acceptable : ['start'],
+		acceptable : ['start', 'test'],
 		next : function(value) {
 			var nextScreen;
 
-			parseAnswer(value, this.acceptable, function(accepted) {
+			parseAnswer(value, this.acceptable, _(function(accepted) {
 				if (accepted) {
-					nextScreen = screens.screen1;
+					if (value === 'test') {
+						nextScreen = changeMessage(this, 'BLAHBLAHBLAH');
+					} else {
+						nextScreen = screens.screen1;
+					}
 				} else {
 					nextScreen = screens.death;
 				}
-			});
+			}).bind(this));
 			
 			/*
-
 			//If the callback isn't needed, parseAnswer can be used this way as well
 
 			if (parseAnswer(value, this.acceptable)) {
@@ -39,23 +41,6 @@ var screens = {
 			}
 			*/
 
-			goToScreen(nextScreen);
-			return nextScreen;
-		}
-	},
-	death : {
-		message : 'You died',
-		submessage : 'Type "retry" to try again',
-		acceptable : ['retry'],
-		next : function(value) {
-			parseAnswer(value, this.acceptable, function(accepted) {
-				if (accepted) {
-					nextScreen = screens.welcome;
-				} else {
-					this.submessage = 'I said type "retry" idiot';
-					nextScreen = screens.death;
-				}
-			})
 			goToScreen(nextScreen);
 			return nextScreen;
 		}
@@ -135,7 +120,23 @@ var screens = {
 	victory : {
 		message : 'You win!',
 		acceptable : ['again'],
-	}	 
+	},
+	death : {
+		message : 'You died',
+		submessage : 'Type "retry" to try again',
+		acceptable : ['retry'],
+		next : function(value) {
+			parseAnswer(value, this.acceptable, function(accepted) {
+				if (accepted) {
+					nextScreen = screens.welcome;
+				} else {
+					nextScreen = screens.death;
+				}
+			})
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	}
 },
 
 /**
@@ -143,6 +144,7 @@ var screens = {
  * @param {Object screen} The next screen we are navigating to
  */
 goToScreen = function(screen) {
+
 	$('#showmsg').html(screen.message)
 	.append('</br>').append(screen.description);
 
@@ -152,6 +154,18 @@ goToScreen = function(screen) {
 		$('#showmsg').append('</br>');
 	}
 	$('#textbox').val('');
+},
+
+/**
+ * Changes the message, but keeps the same screen (so that acceptable answers and such stay the same)
+ * @param {Object screen} just pass this in (if you used _().bind(this) )
+ * @param {String newMessage} The new message
+ * @returns {Object screen} The same screen, but the message is now changed
+ */
+changeMessage = function(screen, newMessage) {
+	screen.message = newMessage;
+	goToScreen(screen);
+	return screen;
 },
 
 /**
@@ -175,7 +189,6 @@ parseAnswer = function(value, acceptable, callback) {
 	if(callback) {
 		callback(reValue);
 	}
-
 
 	//If using the callback ends up being useless, this can still be used
 	if (reValue) {

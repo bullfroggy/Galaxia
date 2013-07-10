@@ -50,7 +50,6 @@ $(document).ready(function() {
 						var code = (e.keyCode ? e.keyCode : e.which);
 						if (code === 13) {
 							currentScreen = currentScreen.next();
-							console.log(currentScreen)
 							$('.uspw').hide();
 							$('#textbox').removeClass('hidden');
 						}
