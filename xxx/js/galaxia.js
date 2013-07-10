@@ -14,6 +14,8 @@ $(document).ready(function() {
 
 				//should return '#game_object'
 				var element = '#' + $(this).attr('id'),
+				currentScreen = screens.login,
+
 				addHTML = function(callback)   {
 					$(element).html('<div id="innerwindow"></div>');
 
@@ -30,7 +32,7 @@ $(document).ready(function() {
 					});
 
 					//add the html here this way we just have to move the div around on the html file
-					$('#innerwindow').html("<div id='showmsg'> <p>" + screens.currentScreen.message + "</p></div>")
+					$('#innerwindow').html("<div id='showmsg'> <p>" + currentScreen.message + "</p></div>")
 						.append('<label class="uspw for="username">Username:</label>')
 						.append('<input class="uspw id="username" width="300"></br>')
 						.append('<label class="uspw for="password">Password:</label>')
@@ -47,7 +49,8 @@ $(document).ready(function() {
 					$('#password').keypress( function(e) {
 						var code = (e.keyCode ? e.keyCode : e.which);
 						if (code === 13) {
-							screens.next();
+							currentScreen = currentScreen.next();
+							console.log(currentScreen)
 							$('.uspw').hide();
 							$('#textbox').removeClass('hidden');
 						}
@@ -59,15 +62,10 @@ $(document).ready(function() {
 						// if e.keyCode is available then use that, otherwise use e.which
 						// probably for browser portability or something
 						// Enter = 13
-						var code = (e.keyCode ? e.keyCode : e.which);
+						var code = (e.keyCode ? e.keyCode : e.which),
+						value = this.value.toLowerCase();
 						if (code === 13) {
-							_.each(screens.currentScreen.acceptable, _(function (ans) {
-								if (ans === this.value) {
-									screens.next();
-								} else {
-									screens.death();
-								}
-							}).bind(this));
+							currentScreen = currentScreen.next(value.toLowerCase());
 						}
 					});
 					
