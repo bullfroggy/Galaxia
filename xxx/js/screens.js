@@ -106,7 +106,7 @@ var screens = {
 		next : function(value) {
 			var nextScreen;
 			switch(value) {
-				case:
+				case '':
 				default:
 					break;
 			}
@@ -121,7 +121,7 @@ var screens = {
 		next : function(value) {
 			var nextScreen;
 			switch(value) {
-				case:
+				case '':
 				default:
 					break;
 			}
@@ -136,7 +136,7 @@ var screens = {
 		next : function(value) {
 			var nextScreen;
 			switch(value) {
-				case:
+				case '':
 				default:
 					break;
 			}
@@ -151,7 +151,7 @@ var screens = {
 		next : function(value) {
 			var nextScreen;
 			switch(value) {
-				case:
+				case '':
 				default:
 					break;
 			}
@@ -166,7 +166,7 @@ var screens = {
 		next : function(value) {
 			var nextScreen;
 			switch(value) {
-				case:
+				case '':
 				default:
 					break;
 			}
@@ -181,7 +181,7 @@ var screens = {
 		next : function(value) {
 			var nextScreen;
 			switch(value) {
-				case:
+				case '':
 				default:
 					break;
 			}
@@ -196,7 +196,7 @@ var screens = {
 		next : function(value) {
 			var nextScreen;
 			switch(value) {
-				case:
+				case '':
 				default:
 					break;
 			}
@@ -211,7 +211,7 @@ var screens = {
 		next : function(value) {
 			var nextScreen;
 			switch(value) {
-				case:
+				case '':
 				default:
 					break;
 			}
@@ -226,7 +226,7 @@ var screens = {
 		next : function(value) {
 			var nextScreen;
 			switch(value) {
-				case:
+				case '':
 				default:
 					break;
 			}
@@ -241,7 +241,7 @@ var screens = {
 		next : function(value) {
 			var nextScreen;
 			switch(value) {
-				case:
+				case '':
 				default:
 					break;
 			}
@@ -256,7 +256,7 @@ var screens = {
 		next : function(value) {
 			var nextScreen;
 			switch(value) {
-				case:
+				case '':
 				default:
 					break;
 			}
@@ -271,7 +271,7 @@ var screens = {
 		next : function(value) {
 			var nextScreen;
 			switch(value) {
-				case:
+				case '':
 				default:
 					break;
 			}
@@ -286,7 +286,7 @@ var screens = {
 		next : function(value) {
 			var nextScreen;
 			switch(value) {
-				case:
+				case '':
 				default:
 					break;
 			}
@@ -301,7 +301,7 @@ var screens = {
 		next : function(value) {
 			var nextScreen;
 			switch(value) {
-				case:
+				case '':
 				default:
 					break;
 			}
@@ -316,7 +316,7 @@ var screens = {
 		next : function(value) {
 			var nextScreen;
 			switch(value) {
-				case:
+				case '':
 				default:
 					break;
 			}
@@ -331,7 +331,7 @@ var screens = {
 		next : function(value) {
 			var nextScreen;
 			switch(value) {
-				case:
+				case '':
 				default:
 					break;
 			}
@@ -346,7 +346,7 @@ var screens = {
 		next : function(value) {
 			var nextScreen;
 			switch(value) {
-				case:
+				case '':
 				default:
 					break;
 			}
@@ -361,7 +361,7 @@ var screens = {
 		next : function(value) {
 			var nextScreen;
 			switch(value) {
-				case:
+				case '':
 				default:
 					break;
 			}
@@ -376,7 +376,7 @@ var screens = {
 		next : function(value) {
 			var nextScreen;
 			switch(value) {
-				case:
+				case '':
 				default:
 					break;
 			}
@@ -391,7 +391,7 @@ var screens = {
 		next : function(value) {
 			var nextScreen;
 			switch(value) {
-				case:
+				case '':
 				default:
 					break;
 			}
@@ -406,22 +406,7 @@ var screens = {
 		next : function(value) {
 			var nextScreen;
 			switch(value) {
-				case:
-				default:
-					break;
-			}
-			goToScreen(nextScreen);
-			return nextScreen;
-		}
-	},
-	
-	//Not Implemented
-	dockingBay : {
-		message : '',
-		next : function(value) {
-			var nextScreen;
-			switch(value) {
-				case:
+				case '':
 				default:
 					break;
 			}
@@ -430,6 +415,20 @@ var screens = {
 		}
 	},
 
+	//Not Implemented
+	dockingBay : {
+		message : '',
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case '':
+				default:
+					break;
+			}
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	},
 
 
 
