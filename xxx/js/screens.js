@@ -15,31 +15,20 @@ var screens = {
 	welcome : {
 		message : 'Welcome to Galaxia',
 		submessage : 'Type "start" to begin',
-		acceptable : ['start', 'test'],
 		next : function(value) {
 			var nextScreen;
 
-			parseAnswer(value, this.acceptable, _(function(accepted) {
-				if (accepted) {
-					if (value === 'test') {
-						nextScreen = changeMessage(this, 'BLAHBLAHBLAH');
-					} else {
-						nextScreen = screens.screen1;
-					}
-				} else {
+			switch(value) {
+				case 'test':
+					nextScreen = changeMessage(this, 'BLAHBLAHBLAH');
+					break;
+				case 'start':
+					nextScreen = screens.screen1;
+					break;
+				default:
 					nextScreen = screens.death;
-				}
-			}).bind(this));
-			
-			/*
-			//If the callback isn't needed, parseAnswer can be used this way as well
-
-			if (parseAnswer(value, this.acceptable)) {
-				nextScreen = screens.screen1;
-			} else {
-				nextScreen = screens.death;
+					break;
 			}
-			*/
 
 			goToScreen(nextScreen);
 			return nextScreen;
@@ -50,24 +39,21 @@ var screens = {
 		This adventure begins on a spaceship named Galaxia where you have been \
 		the janitor for 10 years now.',
 		submessage : 'Type "start" to begin',
-		acceptable : ['start', 'cheese'],
 		next : function (value) {
 			var nextScreen;
 
-			parseAnswer(value, this.acceptable, function(accepted) {
-				if (accepted) {
-					switch(value) {
-						case 'start':
-							nextScreen = screens.screen2;
-							break;
-						case 'cheese':
-							nextScreen = screens.cheese;
-							break;
-					}
-				} else {
+			switch(value) {
+				case 'start':
+					nextScreen = screens.screen2;
+					break;
+				case 'cheese' :
+					nextScreen = screens.cheese;
+					break;
+				default:
 					nextScreen = screens.death;
-				}
-			});
+					break;
+			}
+
 			goToScreen(nextScreen);
 			return nextScreen;
 		}
@@ -75,20 +61,18 @@ var screens = {
 	screen2 : {
 		message : 'Your journey begins in the Mens bathroom, what will you do now?',
 		submessage : 'Type "wipe"',
-		acceptable : ['wipe'],
 		next : function (value) {
 			var nextScreen;
-			parseAnswer(value, this.acceptable, function(accepted) {
-				if (accepted) {
-					switch(value) {
-						case 'wipe':
-							nextScreen = screens.victory;
-							break;
-					}
-				} else {
+
+			switch(value) {
+				case 'wipe':
+					nextScreen = screens.victory;
+					break;
+				default:
 					nextScreen = screens.death;
-				}
-			});
+					break;
+			}
+
 			goToScreen(nextScreen);
 			return nextScreen;
 		}
@@ -96,43 +80,390 @@ var screens = {
 	cheese : {
 		message : 'You typed cheese, why?',
 		submessage : 'Type "Im Stupid" to try again',
-		acceptable : ['im stupid'],
 		next : function (value) {
 			var nextScreen;
 
-			parseAnswer(value, this.acceptable, function(accepted) {
-				if (accepted) {
-					switch(value) {
-						case "i'm stupid":
-						case 'im stupid':
-							nextScreen = screens.welcome;
-							break;
-					}
-				} else {
+			switch(value) {
+				case "i'm stupid":
+				case 'im stupid':
+					nextScreen = screens.welcome;
+					break;
+				default:
 					nextScreen = screens.death;
-				}
-			});
+					break;
+			}
 			goToScreen(nextScreen);
 			return nextScreen;
 		}
 	},
+
+
+	/* REAL SCREENS */
+
+	//Not Implemented
+	mensBathroomStall : {
+		message : '',
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case:
+				default:
+					break;
+			}
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	},
+
+	//Not Implemented
+	mensBathroom : {
+		message : '',
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case:
+				default:
+					break;
+			}
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	},
+
+	//Not Implemented
+	floorOneSouthHall : {
+		message : '',
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case:
+				default:
+					break;
+			}
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	},
+
+	//Not Implemented
+	floorOneMidHall : {
+		message : '',
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case:
+				default:
+					break;
+			}
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	},
+
+	//Not Implemented
+	floorOneNorthHall : {
+		message : '',
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case:
+				default:
+					break;
+			}
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	},
+
+	//Not Implemented
+	womensBathroom : {
+		message : '',
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case:
+				default:
+					break;
+			}
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	},
+
+	//Not Implemented
+	womensBathroomStall : {
+		message : '',
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case:
+				default:
+					break;
+			}
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	},
+
+	//Not Implemented
+	engineRoom : {
+		message : '',
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case:
+				default:
+					break;
+			}
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	},
+
+	//Not Implemented
+	medBay : {
+		message : '',
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case:
+				default:
+					break;
+			}
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	},
+
+	//Not Implemented
+	armory : {
+		message : '',
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case:
+				default:
+					break;
+			}
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	},
+
+	//Not Implemented
+	supplies : {
+		message : '',
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case:
+				default:
+					break;
+			}
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	},
+
+	//Not Implemented
+	stairs : {
+		message : '',
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case:
+				default:
+					break;
+			}
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	},
+
+	//Not Implemented
+	cockpit : {
+		message : '',
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case:
+				default:
+					break;
+			}
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	},
+
+	//Not Implemented
+	floorTwoNorthHall : {
+		message : '',
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case:
+				default:
+					break;
+			}
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	},
+
+	//Not Implemented
+	floorTwoMidHall : {
+		message : '',
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case:
+				default:
+					break;
+			}
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	},
+
+	//Not Implemented
+	floorTwoSouthHall : {
+		message : '',
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case:
+				default:
+					break;
+			}
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	},
+
+	//Not Implemented
+	kitchen : {
+		message : '',
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case:
+				default:
+					break;
+			}
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	},
+
+	//Not Implemented
+	bedrooms : {
+		message : '',
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case:
+				default:
+					break;
+			}
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	},
+
+	//Not Implemented
+	captainsBedroom : {
+		message : '',
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case:
+				default:
+					break;
+			}
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	},
+
+	//Not Implemented
+	recRoom : {
+		message : '',
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case:
+				default:
+					break;
+			}
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	},
+
+	//Not Implemented
+	lockerRoom : {
+		message : '',
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case:
+				default:
+					break;
+			}
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	},
+	
+	//Not Implemented
+	dockingBay : {
+		message : '',
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case:
+				default:
+					break;
+			}
+			goToScreen(nextScreen);
+			return nextScreen;
+		}
+	},
+
+
+
+
+
 	//NEW SCREENS GO HERE
 	victory : {
 		message : 'You win!',
-		acceptable : ['again'],
+		next : function(value) {
+			var nextScreen;
+			switch(value) {
+				case 'again':
+					nextScreen = screens.welcome;
+					break;
+				default:
+					nextScreen = this;
+			}
+
+			goToScreen(nextScreen);
+			return nextScreen;
+ 		}
 	},
 	death : {
 		message : 'You died',
 		submessage : 'Type "retry" to try again',
-		acceptable : ['retry'],
 		next : function(value) {
-			parseAnswer(value, this.acceptable, function(accepted) {
-				if (accepted) {
+			var nextScreen;
+			switch(value) {
+				case 'retry':
 					nextScreen = screens.welcome;
-				} else {
+					break;
+				default:
 					nextScreen = screens.death;
-				}
-			})
+					break;
+			}
 			goToScreen(nextScreen);
 			return nextScreen;
 		}
@@ -166,35 +497,4 @@ changeMessage = function(screen, newMessage) {
 	screen.message = newMessage;
 	goToScreen(screen);
 	return screen;
-},
-
-/**
- * Goes through acceptable list and checks if the input matches one of the values
- * @param {String value} the string input from the text field
- * @param {List acceptable} List of acceptable answers on the current screen
- * @return {Boolean} True if found, False if not
- */
-parseAnswer = function(value, acceptable, callback) {
-	var reValue = false;
-	_.each(acceptable, (function (accept) {
-		if (accept === value) {
-			reValue = true;
-			//This return exits the each
-			return false;
-		}
-	}));
-
-	//This may or may not be useful later
-	//So for now im using this way because it's cooler
-	if(callback) {
-		callback(reValue);
-	}
-
-	//If using the callback ends up being useless, this can still be used
-	if (reValue) {
-		return true;
-	} else {
-		return false;
-	}
-
 };
