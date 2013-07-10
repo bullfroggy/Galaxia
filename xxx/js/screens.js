@@ -1,9 +1,9 @@
 
 
 ////////////
-//Note: All 'acceptable' and all switch cases must be all lower case
+// Note: All 'acceptable' and all switch cases must be all lower case
 //		The value is .toLowerCase() before being sent to the next function
-
+//   ALSO SCREENS CAN HAVE AN OPTION ENTER FUNCTION
 var screens = {
 	login : {
 		message : 'LOGIN',
@@ -92,8 +92,14 @@ var screens = {
 					nextScreen = screens.death;
 					break;
 			}
+			$('#innerwindow').css({background : '#444'});
 			goToScreen(nextScreen);
 			return nextScreen;
+		},
+		enter : function () {
+			$('#innerwindow').css({
+				background : 'url(images/testGameBackground.png) no-repeat'
+			});
 		}
 	},
 
@@ -474,6 +480,9 @@ var screens = {
  * @param {Object screen} The next screen we are navigating to
  */
 goToScreen = function(screen) {
+	if (screen.enter) {
+		screen.enter();
+	}
 
 	$('#showmsg').html(screen.message)
 	.append('</br>').append(screen.description);
