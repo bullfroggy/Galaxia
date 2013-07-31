@@ -12,6 +12,8 @@ var screens = {
 			return screens.welcome;
 		}
 	},
+
+	/* TEST SCREENS */
 	welcome : {
 		message : 'Welcome to Galaxia',
 		submessage : 'Type "start" to begin',
