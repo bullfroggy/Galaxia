@@ -16,7 +16,7 @@ $(document).ready(function() {
 				var element = '#' + $(this).attr('id'),
 				currentScreen = screens.login,
 
-				showLogin = function(callback) {
+				showLogin = function() {
 					$('#innerwindow').html("Login</br></br></br>")
 						.append('<label class="uspw" for="username">Username:</label>')
 						.append('<input class="uspw" id="username" width="300"></br>')
@@ -28,33 +28,42 @@ $(document).ready(function() {
 
 					$('#createAccount').click(showCreateAccount);
 
-					if (callback) {
-						callback();
-					}
-
 				};
 
-				showCreateAccount = function(callback) {
+				showCreateAccount = function() {
 						$('#innerwindow').html("<div id ='showmsg'> <p>" + 'New Account' + "</p></div>")
+							.append('<label class="uspw" for="uname">Username: </label>')
+							.append('<input type="text"class="uspw" id="uname" width="300">')
 							.append('</br>')
-							.append('<form action="./../scripts/test.php", method="POST"')
-							.append('<label class="uspw" for="newUsername">Username: </label>')
-							.append('<input class="uspw" id="newUsername" name="uname" width="300">')
+							.append('<label class="uspw" for="pw">Password:</label>')
+							.append('<input type="text"class="uspw" id="pw" width="300">')
 							.append('</br>')
-							.append('<label class="uspw" for="newPassword">Password:</label>')
-							.append('<input class="uspw, textbox" id="newPassword" name="pw" width="300">')
+							.append('<label class="uspw" for="confirm">Confirm Password:</label>')
+							.append('<input type="text"class="uspw" id="confirm" width="300">')
 							.append('</br>')
-							.append('<label class="uspw" for="confirmPassword">Confirm Password:</label>')
-							.append('<input class="uspw. textbox" id="confirmPassword" width="300">')
-							.append('</br>')
-							.append('<input type = "submit" class="uspw, button" width="300">')
-							.append('</form>')
+							.append('<input id="newUser"type = "submit" class="uspw, button" width="300">')
 							.append('</br></br>')
 							.append('<a class="uspw" id="back" href="#">Back</a>');
+
+						$('#confirm').keyup(function(e) {
+							if($('#pw').val() != $('#confirm').val()) {
+								$('#pw').addClass('error');
+								$('#confirm').addClass('error');
+							} else {
+								$('#pw').removeClass('error');
+								$('#confirm').removeClass('error');
+							}
+						});
+						
+						$('#newUser').click(function() {
+							var username = $('#uname'),
+								pass = $('#pw');
+							if (!username.hasClass('error') && !pass.hasClass('error')) {
+								$.post("scripts/test.php", {uname : username.val(), pw : pass.val()});
+							}
+							
+						});
 						$('#back').click(showLogin);
-					if (callback) {
-						callback();
-					}
 				};
 
 				addHTML = function(callback)   {
