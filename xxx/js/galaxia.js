@@ -17,56 +17,156 @@ $(document).ready(function() {
 				currentScreen = screens.login,
 
 				showLogin = function() {
-					$('#innerwindow').html("Login</br></br></br>")
+					$('#innerwindow').html("<div id ='showmsg'>Login</div>")
+						.append("</br></br></br>")
 						.append('<label class="uspw" for="username">Username:</label>')
-						.append('<input class="uspw" id="username" width="300"></br>')
+						.append('<input class="uspw" maxlength = "12" id="username" width="300"></br>')
 						.append('<label class="uspw" for="password">Password:</label>')
-						.append('<input type="password" class="uspw" id="password" width="300">')
+						.append('<input type="password" maxlength = "12" class="uspw" id="password" width="300">')
 						.append('<input class="hidden" id="textbox">')
 						.append('</br></br>')
-						.append('<a class="uspw" id="createAccount" href="#">Create Account?</a>');
+						.append('<input id="submit" type = "submit" class="uspw button" width="300">')
+						.append('</br></br>')
+						.append('<a class="uspw navig" id="createAccount" href="#">Create Account?</a>');
 
 					$('#createAccount').click(showCreateAccount);
 
-				};
+				},
+
+				validatePasswords = function() {
+					var pass = $('#pw'),
+						confirm = $('#confirm'),
+						message = 0;
+
+						if (pass.val().length < 5) {
+							pass.addClass('error');
+							confirm.addClass('error');
+							message = 'Password is too short';
+						} else if (pass.val().length > 12) {
+							pass.addClass('error');
+							confirm.addClass('error');
+							message =  'Password is too long';
+						} else if (pass.val() != confirm.val()){
+							pass.addClass('error');
+							confirm.addClass('error');
+							message =  'Passwords must match';
+						}
+
+						if (message) {
+							$('#errormsg').html(message);
+							$('#errormsg').append("</br></br>");
+							$('#errormsg').removeClass('hidden');
+						} else {
+							//all good
+							pass.removeClass('error');
+							confirm.removeClass('error');
+							$('#errormsg').addClass('hidden');
+
+						}
+
+						return message;
+
+				},
+
+				validateUser = function() {
+					var user = $('#uname'),
+					    message = 0;
+
+					if (user.val().length === 0) {
+						user.addClass('error');
+						message =  'No Username Entered';
+					} else if (user.val().length < 5) {
+						user.addClass('error');
+						message =  'Username is too short';
+					}
+
+					if (message) {
+						$('#errormsg').html(message);
+						$('#errormsg').append("</br></br>");
+						$('#errormsg').removeClass('hidden');
+					} else {
+						//all good
+						user.removeClass('error');
+						$('#errormsg').addClass('hidden');
+					}
+
+					return message;
+
+				},
+
 
 				showCreateAccount = function() {
 						$('#innerwindow').html("<div id ='showmsg'> <p>" + 'New Account' + "</p></div>")
 							.append('<label class="uspw" for="uname">Username: </label>')
-							.append('<input type="text"class="uspw" id="uname" width="300">')
+							.append('<input type="text"class="uspw" id="uname" maxlength = "12" width="300">')
 							.append('</br>')
 							.append('<label class="uspw" for="pw">Password:</label>')
-							.append('<input type="text"class="uspw" id="pw" width="300">')
+							.append('<input type="password"class="uspw" id="pw" maxlength = "12" width="300">')
 							.append('</br>')
 							.append('<label class="uspw" for="confirm">Confirm Password:</label>')
-							.append('<input type="text"class="uspw" id="confirm" width="300">')
+							.append('<input type="password" maxlength = "12" class="uspw" id="confirm" width="300">')
 							.append('</br>')
-							.append('<input id="newUser"type = "submit" class="uspw, button" width="300">')
+							.append('<input id="newUser"type = "submit" class="uspw button" width="300">')
 							.append('</br></br>')
-							.append('<a class="uspw" id="back" href="#">Back</a>');
+							.append('<div id="errormsg" class="hidden"></div>')
+							.append('<a class="uspw navig" id="back" href="#">Back</a>');
 
-						$('#confirm').keyup(function(e) {
-							if($('#pw').val() != $('#confirm').val()) {
-								$('#pw').addClass('error');
-								$('#confirm').addClass('error');
-							} else {
-								$('#pw').removeClass('error');
-								$('#confirm').removeClass('error');
-							}
-						});
-						
+
+						$('#back').click(showLogin);
+
+						$('#confirm').blur(validatePasswords);
+						$('#pw').blur(validatePasswords);
+						$('#uname').blur(validateUser);
+
 						$('#newUser').click(function() {
 							var username = $('#uname'),
-								pass = $('#pw');
-							if (!username.hasClass('error') && !pass.hasClass('error')) {
-								$.post("scripts/test.php", {uname : username.val(), pw : pass.val()});
-							}
-							
-						});
-						$('#back').click(showLogin);
-				};
+								pass = $('#pw'),
+								confirm = $('#confirm'),
+								message;
 
-				addHTML = function(callback)   {
+							if (!(message = validateUser())) {
+								if (!(message = validatePasswords())) {
+
+									// Everything went fine, remove errors
+									// And write to the database
+									username.removeClass('error');
+									pass.removeClass('error');
+									confirm.removeClass('error');
+									$('#errormsg').addClass('hidden');
+									
+									$.ajax({
+										type : "POST",
+										url : "scripts/test.php",
+										data : {
+											uname : username.val(),
+											pw : pass.val()
+										},
+										
+										success : function (data) {
+											if (data == 0) {
+												message = 'Invalid Username';
+												$('#errormsg').html(message);
+												$('#errormsg').append("</br></br>");
+												$('#errormsg').removeClass('hidden');	
+											} else {
+
+											}
+										},
+										error : function(data) {
+											message = 'Something Broke';
+											$('#errormsg').html(message);
+											$('#errormsg').append("</br></br>");
+											$('#errormsg').removeClass('hidden');
+										}
+										
+									});
+									//$.post("scripts/test.php", {uname : username.val(), pw : pass.val()});
+								}
+							}
+					});
+				},
+
+				addHTML = function(callback) {
 					$(element).html('<div id="innerwindow"></div>');
 
 					//just playing around doing some dynamic css
@@ -85,20 +185,24 @@ $(document).ready(function() {
 					if (callback) {
 						callback();
 					}
+				},
+				startGame = function() {
+					///////VALIDATION HERE
+					currentScreen = screens.login.next();
+					$('.uspw').hide();
+					$('#textbox').removeClass('hidden');
 				};
 
 				addHTML( function() {
 
-					// event handler for password box
-					// TODO: add validation and database support
-					$('#password').keypress( function(e) {
+					$('#password').keypress(function(e) {
+						//Enter = 13
 						var code = (e.keyCode ? e.keyCode : e.which);
 						if (code === 13) {
-							currentScreen = currentScreen.next();
-							$('.uspw').hide();
-							$('#textbox').removeClass('hidden');
+							startGame()
 						}
 					});
+					$('#submit').click(startGame)
 
 					// event handler for textbox
 					$('#textbox').keypress(function(e) {

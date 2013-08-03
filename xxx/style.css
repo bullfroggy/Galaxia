@@ -18,12 +18,23 @@
 	background-clip: padding-box;
 	box-shadow: 3px 3px 3px #666 inset;
 }
-#game_object input.error {
-	border-color: red;
+.navig:hover {
+	color : red;
 }
-
-#game_object input.button {
-	color : #999;
+.button:hover {
+	color : #444;
+	background-color : #666 !important;
+}
+.button:active {
+	outline: none;
+	border: 2px inset #777 !important;
+}
+#game_object input.error {
+	border: 3px solid #700000 ;
+	box-shadow: 3px 3px 3px #700000 outset;
+}
+#errormsg {
+	color : red;
 }
 #game_object input:focus {
 	outline: none;
