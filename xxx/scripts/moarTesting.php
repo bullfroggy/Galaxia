@@ -24,8 +24,6 @@ if ($UN == 'galaxiarules') {
 		echo 'incorrect password';
 
 	}
-
-
 }
 
 
