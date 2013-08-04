@@ -62,16 +62,15 @@ $(document).ready(function() {
 
 						if (message) {
 							displayError(message);
+							return 0;
 						} else {
 							//all good
 							pass.removeClass('error');
 							confirm.removeClass('error');
 							$('#errormsg').addClass('hidden');
+							return 1;
 
 						}
-
-						return message;
-
 				},
 
 				validateUser = function() {
@@ -88,13 +87,13 @@ $(document).ready(function() {
 
 					if (message) {
 						displayError(message);
+						return 0;
 					} else {
 						//all good
 						user.removeClass('error');
 						$('#errormsg').addClass('hidden');
+						return 1;
 					}
-
-					return message;
 
 				},
 
@@ -130,9 +129,9 @@ $(document).ready(function() {
 								confirm = $('#confirm'),
 								message;
 
-							if (!(message = validateUser())) {
-								if (!(message = validatePasswords())) {
-
+							if (validateUser()) {
+								if (validatePasswords()) {
+									
 									// Everything went fine, remove errors
 									// And write to the database
 									username.removeClass('error');
@@ -187,6 +186,7 @@ $(document).ready(function() {
 						callback();
 					}
 				},
+
 				startGame = function() {
 					var con = 0;
 					$.ajax({
