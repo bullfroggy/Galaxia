@@ -16,6 +16,12 @@ $(document).ready(function() {
 				var element = '#' + $(this).attr('id'),
 				currentScreen = screens.login,
 
+				displayError = function(message) {
+					$('#errormsg').html(message);
+					$('#errormsg').append("</br></br>");
+					$('#errormsg').removeClass('hidden');
+				},
+
 				showLogin = function() {
 					$('#innerwindow').html("<div id ='showmsg'>Login</div>")
 						.append("</br></br></br>")
@@ -26,6 +32,8 @@ $(document).ready(function() {
 						.append('<input class="hidden" id="textbox">')
 						.append('</br></br>')
 						.append('<input id="submit" type = "submit" class="uspw button" width="300">')
+						.append('</br></br>')
+						.append('<div id="errormsg" class="hidden"></div>')
 						.append('</br></br>')
 						.append('<a class="uspw navig" id="createAccount" href="#">Create Account?</a>');
 
@@ -53,9 +61,7 @@ $(document).ready(function() {
 						}
 
 						if (message) {
-							$('#errormsg').html(message);
-							$('#errormsg').append("</br></br>");
-							$('#errormsg').removeClass('hidden');
+							displayError(message);
 						} else {
 							//all good
 							pass.removeClass('error');
@@ -81,9 +87,7 @@ $(document).ready(function() {
 					}
 
 					if (message) {
-						$('#errormsg').html(message);
-						$('#errormsg').append("</br></br>");
-						$('#errormsg').removeClass('hidden');
+						displayError(message);
 					} else {
 						//all good
 						user.removeClass('error');
@@ -97,6 +101,8 @@ $(document).ready(function() {
 
 				showCreateAccount = function() {
 						$('#innerwindow').html("<div id ='showmsg'> <p>" + 'New Account' + "</p></div>")
+							.append('DISCLAIMER: THERE IS CURRENTLY NO PASSWORD SECURITY, DO NOT USE YOUR NORMAL PASSWORD')
+							.append('</br></br>')
 							.append('<label class="uspw" for="uname">Username: </label>')
 							.append('<input type="text"class="uspw" id="uname" maxlength = "12" width="300">')
 							.append('</br>')
@@ -144,19 +150,14 @@ $(document).ready(function() {
 										
 										success : function (data) {
 											if (data == 0) {
-												message = 'Invalid Username';
-												$('#errormsg').html(message);
-												$('#errormsg').append("</br></br>");
-												$('#errormsg').removeClass('hidden');	
+												displayError('Invalid Username');
 											} else {
-
+												showLogin();
+												startGame();
 											}
 										},
 										error : function(data) {
-											message = 'Something Broke';
-											$('#errormsg').html(message);
-											$('#errormsg').append("</br></br>");
-											$('#errormsg').removeClass('hidden');
+											displayError('Something Broke');
 										}
 										
 									});
@@ -187,10 +188,46 @@ $(document).ready(function() {
 					}
 				},
 				startGame = function() {
-					///////VALIDATION HERE
-					currentScreen = screens.login.next();
-					$('.uspw').hide();
-					$('#textbox').removeClass('hidden');
+					var con = 0;
+					$.ajax({
+						type : "POST",
+						url : "scripts/moarTesting.php",
+						data : {
+							uname : $('#username').val(),
+							pw : $('#password').val()
+						},
+						
+						success : function (data) {
+							if (data == 'success') {
+
+								$('#errormsg').hide();
+
+								currentScreen = screens.login.next();
+								$('.uspw').hide();
+								$('#textbox').removeClass('hidden');
+
+								// event handler for textbox
+								$('#textbox').keypress(function(e) {
+
+									// if e.keyCode is available then use that, otherwise use e.which
+									// probably for browser portability or something
+									// Enter = 13
+									var code = (e.keyCode ? e.keyCode : e.which),
+									value = this.value.toLowerCase();
+									if (code === 13) {
+										currentScreen = currentScreen.next(value.toLowerCase());
+									}
+								});
+
+							} else {
+								displayError('Incorrect Password');
+							}
+						},
+						error : function(data) {
+							displayError('Something Broke');
+						}
+						
+					});	
 				};
 
 				addHTML( function() {
@@ -202,20 +239,7 @@ $(document).ready(function() {
 							startGame()
 						}
 					});
-					$('#submit').click(startGame)
-
-					// event handler for textbox
-					$('#textbox').keypress(function(e) {
-
-						// if e.keyCode is available then use that, otherwise use e.which
-						// probably for browser portability or something
-						// Enter = 13
-						var code = (e.keyCode ? e.keyCode : e.which),
-						value = this.value.toLowerCase();
-						if (code === 13) {
-							currentScreen = currentScreen.next(value.toLowerCase());
-						}
-					});
+					$('#submit').click(startGame);
 					
 				});
 
