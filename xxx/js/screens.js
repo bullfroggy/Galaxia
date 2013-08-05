@@ -1291,11 +1291,7 @@ var screens = {
 			return nextScreen;
 		}
 	},
-
-<<<<<<< HEAD
-=======
-
->>>>>>> d801f6c17a1390469ed9a62baa7d0f03ce3501cf
+	
 	//NEW SCREENS GO HERE
 	victory : {
 		message : 'You win!',
