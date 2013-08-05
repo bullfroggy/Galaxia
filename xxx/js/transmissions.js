@@ -4,7 +4,7 @@ var USER_NAME;
 function createAccount(username, password, callback) {
 	$.ajax({
 		type : "POST",
-		url : "scripts/test.php",
+		url : "scripts/newUser.php",
 		data : {
 			uname : username,
 			pw : password
@@ -26,7 +26,7 @@ function createAccount(username, password, callback) {
 function login(username, password, callback) {
 	$.ajax({
 		type : "POST",
-		url : "scripts/moarTesting.php",
+		url : "scripts/login.php",
 		data : {
 			uname : username,
 			pw : password
