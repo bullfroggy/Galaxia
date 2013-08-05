@@ -4,6 +4,9 @@
 // Note: All 'acceptable' and all switch cases must be all lower case
 //		The value is .toLowerCase() before being sent to the next function
 //   ALSO SCREENS CAN HAVE AN OPTION ENTER FUNCTION
+
+$.getScript('js/transmissions.js', function() {});
+
 var screens = {
 	login : {
 		message : 'LOGIN',
@@ -20,7 +23,19 @@ var screens = {
 		next : function(value) {
 			var nextScreen;
 
+			
+
 			switch(value) {
+				case 'test screwdriver':
+					saveItem('screwdriver', function() {
+						isItemOwned('screwdriver', function(data) {
+							if (data) {
+								alert("DOPENESS");
+							}
+						});
+					});
+					nextScreen = this;
+					break;
 				case 'test':
 					nextScreen = changeMessage(this, 'BLAHBLAHBLAH');
 					break;
@@ -110,11 +125,16 @@ var screens = {
 
 	//Not Implemented
 	mensBathroomStall : {
-		message : '',
+		message : 'You find yourself inside a stainless steel bathroom stall \
+					sitting atop a toilet. \r\n What would you like to do?',
 		next : function(value) {
 			var nextScreen;
 			switch(value) {
-				case '':
+				case 'look':
+					nextscreen = changeMessage(this,
+						'You see a toilet paper holder to your left which contains two rolls of toilet paper \
+						You let out a sigh of relief. Good thing you restocked the bathroom this morning.');
+					break;
 				default:
 					break;
 			}
@@ -482,7 +502,7 @@ var screens = {
  * @param {Object screen} The next screen we are navigating to
  */
 goToScreen = function(screen) {
-	if (screen.enter) {
+	if (typeof(screen.enter) == typeof(Function)) {
 		screen.enter();
 	}
 
@@ -507,4 +527,25 @@ changeMessage = function(screen, newMessage) {
 	screen.message = newMessage;
 	goToScreen(screen);
 	return screen;
-};
+},
+
+saveItem = function (item, callback) {
+	$.getScript('js/transmissions.js', function() {
+		saveItemToDB(item, 1, function() {
+			callback();
+		});
+		
+	});
+},
+
+isItemOwned = function(item, callback) {
+	$.getScript('js/transmissions.js', function() {
+		saveItemToDB(item, 0, function(data) {
+			if (data) {
+				callback(true);
+			} else {
+				callback(false);
+			}
+		});
+	});
+}
