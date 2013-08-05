@@ -13,8 +13,10 @@ function createAccount(username, password, callback) {
 		success : function (data) {
 			if (data == 0) {
 				callback(false);
-			} else {
+			} else if (data == 1) {
 				callback(true);
+			} else {
+				alert(data);
 			}
 		},
 		error : function(data) {

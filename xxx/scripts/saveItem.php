@@ -4,19 +4,24 @@ $UN = $_POST["username"];
 $ITEM = $_POST["item"];
 $SAVE = $_POST["saveData"];
 
+$mysql_host = "mysql12.000webhost.com";
+$mysql_database = "a9829754_users";
+$mysql_user = "a9829754_galax";
+$mysql_password = "Oopsies1";
 
-$connect = mysql_connect("localhost:3306", "root", "dba");
-//echo($connect);
+$connect = mysql_connect($mysql_host, $mysql_user, $mysql_password);
+if (!$connect) {
+	die('Could not connect to database' . mysql_error());
+}
+$found = @mysql_select_db($mysql_database, $connect) or die("Unable to connect to the database");
 
-@mysql_select_db(testingthings) or die("Unable to connect to the database");
 
-
-$query = mysql_query("SELECT `ID` FROM `login` where `username` ='aaaaa'");
+$query = mysql_query("SELECT `U_ID` FROM `users` where `username` = '$UN'");
 $row = mysql_fetch_row($query);
 
 $userID = $row[0];
 
-$query = mysql_query("SELECT `item_key` FROM `items` where `name` = 'screwdriver'");
+$query = mysql_query("SELECT `item_key` FROM `items` where `name` = '$ITEM'");
 $row = mysql_fetch_row($query);
 $itemID = $row[0];
 

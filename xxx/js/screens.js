@@ -459,8 +459,6 @@ var screens = {
 	},
 
 
-
-
 	//NEW SCREENS GO HERE
 	victory : {
 		message : 'You win!',

@@ -3,12 +3,20 @@
 $UN = $_POST["uname"];
 $PW = $_POST["pw"];
 
-$connect = mysql_connect("localhost:3306", "root", "dba");
-//echo($connect);
+$mysql_host = "mysql12.000webhost.com";
+$mysql_database = "a9829754_users";
+$mysql_user = "a9829754_galax";
+$mysql_password = "Oopsies1";
 
-@mysql_select_db(testingthings) or die("Unable to connect to the database");
+$connect = mysql_connect($mysql_host, $mysql_user, $mysql_password);
+if (!$connect) {
+	die('Could not connect to database' . mysql_error());
+}
 
-$query = "INSERT INTO `testingthings`.`login` (`ID`, `Username`, `Password`) 
+
+$found= @mysql_select_db($mysql_database, $connect) or die("Unable to connect to the database");
+
+$query = "INSERT INTO `a9829754_users`.`users` (`U_ID`, `username`, `password`) 
 	VALUES (NULL, '$UN', '$PW')";
 if (mysql_query($query)) {
 	//write successful
