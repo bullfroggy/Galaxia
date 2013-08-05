@@ -147,7 +147,7 @@ $(document).ready(function() {
 
 											} else {
 
-												displayError('Invalid Username');
+												displayError(data);
 											}
 										});
 										//$.post("scripts/test.php", {uname : username.val(), pw : pass.val()});

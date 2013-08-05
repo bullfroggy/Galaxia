@@ -11,6 +11,8 @@ $mysql_password = "Oopsies1";
 //Bypass database check
 if ($UN == 'galaxiarules') {
 	echo 'success';
+} else if ($UN == '') {
+	echo 'No username entered';
 } else {
 
 	$connect = mysql_connect($mysql_host, $mysql_user, $mysql_password);
@@ -23,15 +25,11 @@ if ($UN == 'galaxiarules') {
 	$query = mysql_query("SELECT `password` FROM `users` WHERE `username` = '$UN'") or die('Username not found');
 
 	$row = mysql_fetch_row($query);
-	if ($row[0]) {
-		if ($row[0] == $PW) {
-			echo 'success';
-		} else {
-			echo 'incorrect password';
-
-		}
+	if ($row[0] == $PW) {
+		echo 'success';
 	} else {
-		echo 'no username entered';
+		echo 'incorrect password';
+
 	}
 }
 
