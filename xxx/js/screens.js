@@ -548,7 +548,7 @@ var screens = {
 						nextscreen = changeMessage(this,
 							"You are still in the freezer!");
 					}
-					else{
+					else if (cafeteria){
 						nextscreen = changeMessage(this,
 							"You open the cafeteria door and walk back into the corridor.");
 					}
@@ -653,7 +653,7 @@ var screens = {
 				break;
 				
 				case 'look seat':
-					if (cockpit && pamphlet3 === 1){
+					if (cockpit && pamphlet3 === -1){
 						nextscreen = changeMessage(this,
 							"You notice a small pamphlet wedged between the cushions of the pilot seat.");
 					}
@@ -773,22 +773,13 @@ var screens = {
 					sitcouch = false;
 				break;
 				
-				case 'exit mess hall':
-					if (cafeteria){
-						nextscreen = changeMessage(this,
-							"You leave the cafeteria.");
-					}
-					cafeteria = false;
-					lowercorridor1 = true;
-				break;
-				
 				case 'look TV':
 					if (recroom){
 						nextscreen = changeMessage(this,
 							"You generally ignore whatever is on the TV. Usually it’s something stupid like \
 							“Alien Idol” or “Squirrel Code”; absolute rubbish. Though you do sometimes get \
 							caught up in game shows like “Who wants to be a Quintillionaire?” You know the \
-							answer most of the questions asked on that show, I mean you’d totally be able \
+							answer to most of the questions asked on that show, I mean you’d totally be able \
 							to walk away with a couple million at least, right?");
 					}
 				break;
@@ -827,24 +818,24 @@ var screens = {
 				break;
 				
 				case 'close locker':
-					if (lockerroom){
+					if (lockerroom && lockeropen){
 						nextscreen = changeMessage(this,
 							"You slam your locker shut for some unknown reason.");
 						lockeropen = false;
 					}
 				break;
 				
+				case 'look locker':
 				case 'check locker':
-					if (lockeropen){
+					if (lockeropen && lockerroom){
 						nextscreen = changeMessage(this,
 							"Your locker is totally empty except for a small rectangular device perched on the top shelf. The unikey.");
 					}
 				break;
 				
 				
-				
 				case 'take unikey':
-					if (lockeropen){
+					if (lockeropen && lockerroom ){
 						if (unikey == -1){
 							nextscreen = changeMessage(this,
 								"You take the unikey and put it in your pocket."); 
@@ -956,7 +947,7 @@ var screens = {
 					}
 				break;
 					
-				case 'flip AG switch':
+				case 'flip ag switch':
 					if (cockpit){
 						nextscreen = changeMessage(this,
 							"You just turned off artificial gravity. You and everything else \
@@ -1032,7 +1023,7 @@ var screens = {
 								"You exit the cockpit and head back to the main corridor.");
 						cockpit = false;
 						inchair = false;
-						uppercorridor1 = true;
+						uppercorridor3 = true;
 					}
 					break;
 				
@@ -1292,10 +1283,6 @@ var screens = {
 		}
 	},
 
-<<<<<<< HEAD
-=======
-
->>>>>>> d801f6c17a1390469ed9a62baa7d0f03ce3501cf
 	//NEW SCREENS GO HERE
 	victory : {
 		message : 'You win!',
