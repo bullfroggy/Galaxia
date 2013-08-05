@@ -169,42 +169,32 @@ var screens = {
 			return nextScreen;
 		}
 	},
-	cheese : {
-		message : 'You typed cheese, why?',
-		submessage : 'Type "Im Stupid" to try again',
-		next : function (value) {
-			var nextScreen;
-
-			switch(value) {
-				case "i'm stupid":
-				case 'im stupid':
-					nextScreen = screens.welcome;
-					break;
-				default:
-					nextScreen = screens.death;
-					break;
-			}
-			$('#innerwindow').css({background : '#444'});
-			goToScreen(nextScreen);
-			return nextScreen;
-		},
-		enter : function () {
-			$('#innerwindow').css({
-				background : 'url(images/testGameBackground.png) no-repeat'
-			});
-		}
-	},
-
 
 	/* REAL SCREENS */
 
-	//Not Implemented
 	startGame : {
 		message : 'You find yourself inside a stainless steel bathroom stall \
 					sitting atop a toilet. \r\n What would you like to do?',
 		next : function(value) {
 			var nextScreen;
 			switch(value) {
+				case 'test save screwdriver':
+					saveItem('screwdriver', function() {
+						nextscreen = changeMessage(this,
+							'Screwdriver is saved to the database');
+					});
+					break;
+				case 'test check screwdriver':
+					isItemOwned('screwdriver', function() {
+						nextscreen = changeMessage(this,
+							'Screwdriver is saved on the database');
+					});
+					break;
+				case 'reset message' :
+					nextscreen = changeMessage(this,
+						'You find yourself inside a stainless steel bathroom stall \
+					sitting atop a toilet. \r\n What would you like to do?');
+					break;
 				case 'look':
 				case 'check':
 					if (stall || ontoilet){
@@ -1291,7 +1281,7 @@ var screens = {
 			return nextScreen;
 		}
 	},
-	
+
 	//NEW SCREENS GO HERE
 	victory : {
 		message : 'You win!',
@@ -1333,9 +1323,9 @@ var screens = {
  * @param {Object screen} The next screen we are navigating to
  */
 goToScreen = function(screen) {
-	if (typeof(screen.enter) == typeof(Function)) {
-		screen.enter();
-	}
+	//if (typeof(screen.enter) == typeof(Function)) {
+		//screen.enter();
+	//}
 
 	$('#showmsg').html(screen.message)
 	.append('</br>').append(screen.description);

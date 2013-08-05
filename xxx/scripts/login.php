@@ -23,11 +23,15 @@ if ($UN == 'galaxiarules') {
 	$query = mysql_query("SELECT `password` FROM `users` WHERE `username` = '$UN'") or die('Username not found');
 
 	$row = mysql_fetch_row($query);
-	if ($row[0] == $PW) {
-		echo 'success';
-	} else {
-		echo 'incorrect password';
+	if ($row[0]) {
+		if ($row[0] == $PW) {
+			echo 'success';
+		} else {
+			echo 'incorrect password';
 
+		}
+	} else {
+		echo 'no username entered';
 	}
 }
 
